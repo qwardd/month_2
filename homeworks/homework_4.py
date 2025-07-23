@@ -8,10 +8,10 @@ def date(func):
         result = func(*args, **kwargs)
         end = dt.now()
         print(f"Функция закончила работу в - {end.hour}:{end.minute}:{end.second}   {end.day}/{end.month}/{end.year} ")
-        razn = end - start
-        print(f"Функция работала - {razn}")
+        difference = end - start
+        print(f"Функция работала - {difference}")
         return result
-        return razn
+        return difference
     return wrapper
 
 
