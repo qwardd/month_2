@@ -44,6 +44,13 @@ def get_all_genres():
     INNER JOIN books AS b ON a.id = b.genre_id
             """)
     return results
+def get_all_books():
+    results = conn.execute("""
+    SELECT a.id, a.name, a.author FROM books AS a
+    INNER JOIN genres AS b ON a.id = b.genre_id;
+        """)
+    return results
+
 
 
 def insert_book(name, author, publication_year,  number_of_pages, number_of_copies, genre_id):
@@ -64,6 +71,10 @@ if __name__ == '__main__':
     conn = sqlite3.connect('database.sqlite3')
     create_table()
 
+    insert_genre("роман")
+    insert_genre("рассказ")
+    insert_genre("повесть")
+
     insert_book("Мертвые души", "Гоголь", 1842,  352, 32, 1)
     insert_book("Война и мир", "Толстой", 1867 ,  1696 , 267, 1)
     insert_book("Мастер и Маргарита", 'Булгаков', 1940,  480, 76, 2)
@@ -76,9 +87,7 @@ if __name__ == '__main__':
     insert_book('Идиот', 'Достоевский', 1869, 640, 57, 3 )
 
 
-    insert_genre("роман")
-    insert_genre("рассказ")
-    insert_genre("повесть")
+    
 
     for book in get_books():
         print(book)
